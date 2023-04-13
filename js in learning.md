@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 # 学习JavaScript学习笔记
 
 [toc]
 
 
 
+=======
+学习JavaScript学习笔记
+>>>>>>> 3f5f1b04394763c5119c97109bd2ebbc8ae868f1
 1.最基本的输出
   alert("hello new man");//弹窗输入
   document.write("hello new bog"); //作为body在HTML文件中输入

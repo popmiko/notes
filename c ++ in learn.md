@@ -54,6 +54,10 @@ namespace u2
 1.3 同命名空间名不用文件系统会自动整合最终内容
 // 如果说同一个工程下的不同文件，都有相同的命名空间，编译器最后会将其合并
 
+<<<<<<< HEAD
+=======
+>>>>>>> a5cea49e72ab8b5f34915f949b4e95817be4d950
+>>>>>>> 3f5f1b04394763c5119c97109bd2ebbc8ae868f1
 // test1.cpp
 namespace u4
 {
@@ -218,8 +222,24 @@ const char* pc = "abcd";
 const char* const pc="abc";
 <<<<<<< HEAD
 **注意事项：**
+<<<<<<< HEAD
 **1.如果用const定义整型常量，关键字可以省略。即 const int bufsize = 100 与 const bufsize = 100等价；**
+=======
+**1.如果用const定义整型常量，关键字可以省略。即 const in bufsize = 100 与 const bufsize = 100等价；**
+>>>>>>> 3f5f1b04394763c5119c97109bd2ebbc8ae868f1
 **2.常量一旦被建立，在程序的任何地方都不能再更改。**
 **3.与#define不同，const定义的常量可以有自己的数据类型。**
 **4.函数参数也可以用const说明，用于保证实参在该函数内不被改动**。
 
+<<<<<<< HEAD
+=======
+=======
+注意事项：
+1.如果用const定义整型常量，关键字可以省略。即 const in bufsize = 100 与 const bufsize = 100等价；
+2.常量一旦被建立，在程序的任何地方都不能再更改。
+3.与#define不同，const定义的常量可以有自己的数据类型。
+4.函数参数也可以用const说明，用于保证实参在该函数内不被改动。
+
+kjasodinaoicnoiznxcoinao
+>>>>>>> a5cea49e72ab8b5f34915f949b4e95817be4d950
+>>>>>>> 3f5f1b04394763c5119c97109bd2ebbc8ae868f1
