@@ -1,5 +1,7 @@
 [toc]
 
+------
+
 
 
 # 1.定义命名空间
@@ -53,6 +55,7 @@ namespace u2
 =======
 1.3 同命名空间名不用文件系统会自动整合最终内容
 // 如果说同一个工程下的不同文件，都有相同的命名空间，编译器最后会将其合并
+
 
 // test1.cpp
 namespace u4
@@ -182,6 +185,8 @@ istream& getline ( istream& is, string& str);//默认以换行符结束
 istream& getline ( istream& is, string& str, char delim);
 ```
 
+------
+
 
 
 ### 3.3.2
@@ -216,10 +221,9 @@ const char* pc = "abcd";
 
 指向常量的常指针：这个指针所指的地址不能改变，它所指向的地址中的内容也不能改变。
 const char* const pc="abc";
-<<<<<<< HEAD
-**注意事项：**
-**1.如果用const定义整型常量，关键字可以省略。即 const int bufsize = 100 与 const bufsize = 100等价；**
-**2.常量一旦被建立，在程序的任何地方都不能再更改。**
-**3.与#define不同，const定义的常量可以有自己的数据类型。**
-**4.函数参数也可以用const说明，用于保证实参在该函数内不被改动**。
+注意事项：
+1.如果用const定义整型常量，关键字可以省略。即 const in bufsize = 100 与 const bufsize = 100等价；
+2.常量一旦被建立，在程序的任何地方都不能再更改。
+3.与#define不同，const定义的常量可以有自己的数据类型。
+4.函数参数也可以用const说明，用于保证实参在该函数内不被改动。
 
