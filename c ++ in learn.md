@@ -127,6 +127,55 @@ using namespace std;
 **注意：cout和cin都为自适应参数输出和输入，但它每次只能穿入一个参数，不能一次性传入多个变量；**
 **cin的分隔符号一般为enter**
 
+## 3.2字符串的输入
+
+### 3.2.1cin.ge
+
+cin.get(字符数组名，接收字符数)用来接收一行字符串，可以接收空格
+
+cin.get(无参数)没有参数主要是用于舍弃输入流中的不需要的字符,或者舍弃回车,弥补cin.get(字符数组名,接收字符数目)的不足
+
+```c++
+#include <iostream>
+using namespace std;
+ 
+int main(void)
+{
+     
+    char arr[10];
+    cin.get(arr,10);
+    cin.get();//用于吃掉回车，相当于getchar();
+    cout<<arr<<endl;
+    cin.get(arr,5);
+    cout<<arr<<endl;
+    system("pause");
+    return 0;
+}
+ 
+输入abcdefghi
+输出abcdefghi
+输入abcde
+输出abcd
+请按任意键继续
+
+```
+
+### 3.2.2getline()
+
+getline() // 接受一个字符串，可以接收空格并输出，需包含“#include<string>”
+
+```c++
+string str;
+getline(cin,str);
+cout<<str<<endl;
+
+输入：jkljkljkl //VC6中有个bug,需要输入两次回车。
+输出：jkljkljkl
+//和cin.getline()类似，但是cin.getline()属于istream流，而getline()属于string流，是不一样的两个函数
+```
+
+
+
 ------
 
 
@@ -183,8 +232,6 @@ istream& getline ( istream& is, string& str);//默认以换行符结束
 istream& getline ( istream& is, string& str, char delim);
 ```
 
-
-
 ### 3.3.2
 
 在输入时缓存区未读取完会造成输入异常，可以通过clear清除异常状态。
@@ -217,10 +264,119 @@ const char* pc = "abcd";
 
 指向常量的常指针：这个指针所指的地址不能改变，它所指向的地址中的内容也不能改变。
 const char* const pc="abc";
-
 注意事项：
 1.如果用const定义整型常量，关键字可以省略。即 const in bufsize = 100 与 const bufsize = 100等价；
 2.常量一旦被建立，在程序的任何地方都不能再更改。
 3.与#define不同，const定义的常量可以有自己的数据类型。
 4.函数参数也可以用const说明，用于保证实参在该函数内不被改动。
 
+# 5.类的定义
+
+  C++中使用关键字 **class** 来定义类, 其基本形式如下:
+
+```cpp
+class 类名
+{
+    public:
+        //公共的行为或属性
+    private:
+        //私有的行为或属性
+};
+```
+
+说明:
+     ①. 类名 需要遵循一般的命名规则;
+     ②. **public** 与 **private** 为属性/方法限制的关键字, private 表示该部分内容是私密的, 不能被外部所访问或调用, 只能被本类内部访问; 而 public 表示公开的属性和方法, 外界可以直接访问或者调用。
+       一般来说类的属性成员都应设置为private, public只留给那些被外界用来调用的函数接口, 但这并非是强制规定, 可以根据需要进行调整;
+     ③. 结束部分的分号不能省略。
+
+## C++类的实现
+
+   在上面的定义示例中我们只是定义了这个类的一些属性和方法声明, 并没有去实现它, 类的实现就是完成其方法的过程。类的实现有两种方式, 一种是在类定义时完成对成员函数的定义, 另一种是在类定义的外部进行完成。
+   1>. 在类定义时定义成员函数
+     成员函数的实现可以在类定义时同时完成, 如代码:
+
+```cpp
+#include <iostream>
+using namespace std;
+class Point
+{
+    public:
+        void setPoint(int x, int y) //实现setPoint函数
+        {
+            xPos = x;
+            yPos = y;
+        }
+        void printPoint()       //实现printPoint函数
+        {
+            cout<< "x = " << xPos << endl;
+            cout<< "y = " << yPos << endl;
+        }
+    private:
+        int xPos;
+        int yPos;
+};
+int main()
+{
+    Point M;        //用定义好的类创建一个对象 点M
+    M.setPoint(10, 20); //设置 M点 的x,y值
+    M.printPoint();     //输出 M点 的信息
+    return 0;
+}
+```
+
+运行输出:
+
+```
+	x = 10
+  y = 20
+```
+
+与类的定义相比, 在类内实现成员函数不再是在类内进行声明, 而是直接将函数进行定义, 在类中定义成员函数时, 编译器默认会争取将其定义为 inline 型函数 2>. 在类外定义成员函数
+     在类外定义成员函数通过在类内进行声明, 然后在类外通过作用域操作符 **::** 进行实现, 形式如下:
+
+```
+返回类型 类名::成员函数名(参数列表)
+{
+     //函数体
+}
+```
+
+
+
+```cpp
+#include <iostream>
+using namespace std;
+class Point
+{
+    public:
+        void setPoint(int x, int y); //在类内对成员函数进行声明
+        void printPoint();
+    private:
+        int xPos;
+        int yPos;
+};
+void Point::setPoint(int x, int y) //通过作用域操作符 '::' 实现setPoint函数
+{
+    xPos = x;
+    yPos = y;
+}
+void Point::printPoint()       //实现printPoint函数
+{
+    cout<< "x = " << xPos << endl;
+    cout<< "y = " << yPos << endl;
+}
+int main()
+{
+    Point M;        //用定义好的类创建一个对象 点M
+    M.setPoint(10, 20); //设置 M点 的x,y值
+    M.printPoint();     //输出 M点 的信息
+    return 0;
+}
+```
+
+依 setPoint 成员函数来说, 在类内声明的形式为 **void setPoint(int x, int y);** 那么在类外对其定义时函数头就应该是 **void Point::setPoint(int x, int y)** 这种形式, 其返回类型、成员函数名、参数列表都要与类内声明的形式一致。
+
+## 对象的作用域、可见域与生存周期
+
+   类对象的作用域、可见域以及生存周期与普通变量的保持相同, 当对象生存周期结束时对象被自动撤销, 所占用的内存被回收, 需要注意的是, 如果对象的成员函数中有使用 **new** 或者 ***\*malloc\**** 申请的动态内存程序不会对其进行释放, 需要我们手动进行清理, 否则会造成内存泄露。
