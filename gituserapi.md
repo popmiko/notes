@@ -1,3 +1,9 @@
+
+
+[toc]
+
+
+
 创造
 克隆现有存储库
 
@@ -164,3 +170,25 @@ $ git reset
 …并保留未提交的本地更改
 
 $ git reset --keep
+
+#遇到问题解决方案
+
+##文件缺少md，与原厂仓库冲突
+
+```git
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., ‘git pull …’) before pushing again.
+hint: See the ‘Note about fast-forwards’ in ‘git push --help’ for details.
+```
+
+解决方法：`git pull --rebase origin master`
+
+原理：
+
+把远程库中的更新合并到本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。然后再进行push即可。
+
+git pull -–rebase origin master 操作，意为先取消commit记录，并且把它们临时保存为补丁(patch)(这些补丁在”.git/rebase”目录中)，之后同步远程库到本地，最后合并补丁到本地库之中。
+
+注意：距离上次push提交至今，在本地库commit的记录均暂存为patch。
