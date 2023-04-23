@@ -221,7 +221,7 @@ istream& get ( char* s,  streamsize(c语言中的long long)  n, char delim );
 
 
 
-### 3.3.1
+### 3.3.1使用get方法输入字符串
 
 读取一行可以使用istream& get ( char* s, streamsize n )或者istream& get ( char* s, size_t n, streamsize delim )。二者的区别是前者默认以换行符结束，后者可指定结束符。n表示目标空间的大小。
 注：cin.get cin.getline 区别在于get会将分隔符也输入缓存区。
@@ -232,7 +232,7 @@ istream& getline ( istream& is, string& str);//默认以换行符结束
 istream& getline ( istream& is, string& str, char delim);
 ```
 
-### 3.3.2
+### 3.3.2cin使用注意事项
 
 在输入时缓存区未读取完会造成输入异常，可以通过clear清除异常状态。
 同样的cin.ignore(numeric_limits< std::streamsize>::max()); 会清除cin中所以的内容。
@@ -270,6 +270,31 @@ const char* const pc="abc";
 3.与#define不同，const定义的常量可以有自己的数据类型。
 4.函数参数也可以用const说明，用于保证实参在该函数内不被改动。
 
+## 4.4 sizeof的注意事项
+
+```c++
+#include <iostream>
+using namespace std;
+int sum(int arr[]){
+	int length = sizeof(arr)/sizeof(arr[0])
+    int sum = 0;
+    for (int i = 0 ; i < length; i++){
+        sum += arr[i];
+    }
+    return sum;
+}
+int main(){
+    int arr[] = {1,3,5,7,9};
+    //cout<<sizeof(arr)/sizeof(int);
+    //使用'sizeof' on array function parameter 'a' will return size of 'int*' [-Wsizeof-array-argument]
+    int summary = sum(arr);
+    cout << summary << endl;
+}
+
+```
+
+注意：数组作为参数传给函数时，是传给数组的地址，而不是传给整个的数组空间，因而sizeof(arr)这句话会报错.
+
 # 5.类的定义
 
   C++中使用关键字 **class** 来定义类, 其基本形式如下:
@@ -280,8 +305,13 @@ class 类名
     public:
         //公共的行为或属性
     private:
-        //私有的行为或属性
+        //私有的行为或属性 类内的属性无法被外部d
 };
+//在外部继续写class内的方法
+ 类名::方法名(  )
+ {
+   
+ }
 ```
 
 说明:
