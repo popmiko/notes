@@ -276,7 +276,7 @@ const char* const pc="abc";
 #include <iostream>
 using namespace std;
 int sum(int arr[]){
-	int length = sizeof(arr)/sizeof(arr[0])
+	int length = sizeof(arr)/sizeof(arr[0]);
     int sum = 0;
     for (int i = 0 ; i < length; i++){
         sum += arr[i];
@@ -410,3 +410,5 @@ int main()
 ## 对象的作用域、可见域与生存周期
 
    类对象的作用域、可见域以及生存周期与普通变量的保持相同, 当对象生存周期结束时对象被自动撤销, 所占用的内存被回收, 需要注意的是, 如果对象的成员函数中有使用 **new** 或者 ***\*malloc\**** 申请的动态内存程序不会对其进行释放, 需要我们手动进行清理, 否则会造成内存泄露。
+
+学不会了，时间来不及，不学了。
